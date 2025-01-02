@@ -1,3 +1,4 @@
+$max: 480px;
 .panel {
   overflow: auto;
   background: var(--env-bg-primary);
@@ -5,7 +6,7 @@
   height: 100%;
   overflow: auto;
   min-width: 160px;
-  max-width: 380px;
+  max-width: $max;
   transition: 0.3s;
   user-select: none;
   text-align: left;
@@ -13,6 +14,7 @@
     padding: 8px;
   }
   .header {
+    color: #09ff3e;
     border-bottom: var(--env-border-primary);
     padding: 8px;
     display: flex;
@@ -32,5 +34,23 @@
         background: rgba(0, 0, 0, 0.493);
       }
     }
+  }
+}
+
+.info {
+  padding: 2px 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  border-bottom: thin solid rgba(245, 222, 179, 0.096);
+  label {
+    font-size: 11px;
+    color: #36a527;
+  }
+  span {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

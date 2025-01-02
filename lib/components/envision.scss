@@ -1,9 +1,14 @@
-$primary: #3f273f;
+$primary: #050505;
 :root {
   .dark {
     --env-bg-primary: #{$primary};
     --env-fg-primary: rgb(255, 255, 255);
-    --env-border-primary: thin solid #875187;
+    --env-border-primary: thin solid #464546;
+  }
+  .light {
+    --env-bg-primary: #f8f8f8;
+    --env-fg-primary: rgb(15, 15, 15);
+    --env-border-primary: thin solid #464546;
   }
 }
 
