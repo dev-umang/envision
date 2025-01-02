@@ -1,0 +1,23 @@
+.indicator {
+  padding: 4px 8px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background: var(--env-bg-primary);
+  color: var(--env-fg-primary);
+  border: var(--env-border-primary);
+  border-bottom: none;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.473);
+  position: relative;
+  z-index: 999996;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  opacity: 0.2;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}

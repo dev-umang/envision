@@ -1,0 +1,24 @@
+$primary: #3f273f;
+:root {
+  .dark {
+    --env-bg-primary: #{$primary};
+    --env-fg-primary: rgb(255, 255, 255);
+    --env-border-primary: thin solid #875187;
+  }
+}
+
+.envision-container {
+  position: fixed;
+  z-index: 999996;
+  bottom: 0;
+  left: 16px;
+  min-width: 160px;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 47.2px;
+  &.show {
+    height: 100vh;
+  }
+}
