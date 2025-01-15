@@ -1,15 +1,23 @@
 {
-  "name": "envision",
-  "private": true,
-  "version": "1.0.0",
+  "name": "react-envision",
+  "version": "0.0.1",
   "description": "This package will help developers quickly and easily identify the environment in which the application is currently running.",
   "type": "module",
+  "author": {
+    "email": "dev.umangjoshi@gmail.com",
+    "name": "Umang Joshi",
+    "url": "https://github.com/dev-umang"
+  },
+  "repository": {
+    "url": "https://github.com/dev-umang/envision"
+  },
   "scripts": {
     "dev": "vite --mode dev",
     "uat": "vite --mode monmouth.uat",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublish": "pnpm build"
   },
   "dependencies": {
     "react": "^18.3.1",
