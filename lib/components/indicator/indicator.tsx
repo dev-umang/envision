@@ -3,9 +3,14 @@ import s from "./_indicator.module.scss";
 import { IndicatorProps } from "./indicator.props";
 import UGIcon from "../icon/icon";
 
-const Indicator: FC<IndicatorProps & { open?: boolean; darkMode?: boolean }> = (
-  p
-) => {
+const Indicator: FC<
+  IndicatorProps & {
+    position: "bl" | "br";
+    open?: boolean;
+    darkMode?: boolean;
+    onPositionChange?: () => void;
+  }
+> = (p) => {
   const mode = p.mode ?? import.meta.env.MODE ?? "unknown";
 
   const getBuildType = useMemo(() => {
@@ -17,7 +22,7 @@ const Indicator: FC<IndicatorProps & { open?: boolean; darkMode?: boolean }> = (
       );
     else if (import.meta.env.PROD)
       return <UGIcon size={28} icon={p.darkMode ? "fast" : "fastDark"} />;
-    return <UGIcon size={28} icon={p.darkMode ? "slowDark" : "slow"} />;
+    return <UGIcon size={28} icon={p.darkMode ? "slow" : "slowDark"} />;
   }, [p.darkMode, p.productionBuild]);
 
   return (
@@ -27,13 +32,24 @@ const Indicator: FC<IndicatorProps & { open?: boolean; darkMode?: boolean }> = (
       onClick={() => p.onClick?.()}
     >
       <div style={{ display: "inline-flex" }} title="Hide this indicator">
-        <UGIcon size={28} icon="eye" />
+        {/* <UGIcon size={28} icon="eye" /> */}
       </div>
       <strong title={`This app is in ${mode} mode. Click to expand.`}>
         {mode.toUpperCase()}
       </strong>
       <div style={{ display: "inline-flex" }} title="Indicates app build type">
         {getBuildType}
+      </div>
+      <div className={s.positionBtns}>
+        {/* <button>L</button> */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            p.onPositionChange?.();
+          }}
+        >
+          {p.position === "bl" ? "RIGHT" : "LEFT"}
+        </button>
       </div>
     </div>
   );

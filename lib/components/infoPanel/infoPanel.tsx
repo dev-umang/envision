@@ -3,13 +3,27 @@ import s from "./infoPanel.module.scss";
 import { InfoPanelProps } from "./info.props";
 import UGIcon from "../icon/icon";
 
-const InfoPanel: FC<InfoPanelProps> = ({ show, setShow, data }) => {
+const InfoPanel: FC<InfoPanelProps> = ({
+  show,
+  setShow,
+  data,
+  darkMode,
+  ...p
+}) => {
   return (
     <div className={s.panel} style={{ opacity: show ? 1 : 0 }}>
       <div className={s.header}>
         <strong>Mode Info</strong>
-        <div>
-          <UGIcon icon="slow" />
+        <div className={s.headerExtra}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              p.updateDarkMode?.();
+            }}
+            className={s.iconBtn}
+          >
+            <UGIcon icon={darkMode ? "sun" : "moon"} size={16} />
+          </button>
           <button onClick={() => setShow?.(false)} className={s.hideBtn}>
             Hide
           </button>

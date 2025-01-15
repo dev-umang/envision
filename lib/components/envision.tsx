@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { IndicatorProps } from "./indicator/indicator.props";
 import Indicator from "./indicator/indicator";
 import InfoPanel from "./infoPanel/infoPanel";
@@ -19,6 +19,28 @@ const defaultExclude = ["PROD", "DEV", "BASE_URL", "SSR", "MODE"];
 const ENVision: FC<Props> = (p) => {
   const [show, setShow] = useState(false);
   const [info, setInfo] = useState<InfoPanelProps["data"]>(null);
+  const [darkMode, setDarkMode] = useState(true);
+  const [pos, setPos] = useState<"br" | "bl">("bl");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setDarkMode(p.lightMode ? false : true);
+  }, [p.lightMode]);
+
+  useEffect(() => {
+    setPos(p.position ?? "bl");
+  }, [p.position]);
+
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (ref.current && !ref.current.contains(e.target as HTMLElement))
+        setShow(false);
+    });
+
+    return () => {
+      document.removeEventListener("click", () => {});
+    };
+  }, []);
 
   const getFromVite = useCallback(() => {
     console.log(`Vite env =>`, import.meta.env);
@@ -45,18 +67,33 @@ const ENVision: FC<Props> = (p) => {
     else getFromEnv(p.envObject);
   }, [getFromEnv, getFromVite, p.envObject]);
 
+  const onPosChange = () => setPos((p) => (p === "bl" ? "br" : "bl"));
+
   return (
     <div
-      className={`${p.lightMode ? "light" : "dark"} envision-container ${
-        show ? "show" : ""
-      }`}
+      className={`${darkMode ? "dark" : "light"} envision-container ${
+        pos === "bl" ? "bl" : "br"
+      } ${show ? "show" : ""}`}
+      ref={ref}
     >
-      {show && <InfoPanel {...{ show, setShow, data: info }} />}
+      {show && (
+        <InfoPanel
+          {...{
+            show,
+            setShow,
+            data: info,
+            darkMode,
+            updateDarkMode: () => setDarkMode((isDark) => !isDark),
+          }}
+        />
+      )}
       <Indicator
         {...p.indicator}
         open={show}
         onClick={() => setShow(!show)}
-        darkMode={true}
+        darkMode={darkMode}
+        onPositionChange={onPosChange}
+        position={pos}
       />
     </div>
   );

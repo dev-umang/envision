@@ -4,11 +4,19 @@ $primary: #050505;
     --env-bg-primary: #{$primary};
     --env-fg-primary: rgb(255, 255, 255);
     --env-border-primary: thin solid #464546;
+    --env-panel-title: #09ff3e;
+    --env-panel-label: #a55527;
+    --env-scroll-thumb: #5d5d63;
+    --env-scroll-track: #111111;
   }
   .light {
     --env-bg-primary: #f8f8f8;
     --env-fg-primary: rgb(15, 15, 15);
     --env-border-primary: thin solid #464546;
+    --env-panel-title: #206d4d;
+    --env-panel-label: #dd3e0e;
+    --env-scroll-thumb: #979797;
+    --env-scroll-track: #dfdfdf;
   }
 }
 
@@ -16,7 +24,7 @@ $primary: #050505;
   position: fixed;
   z-index: 999996;
   bottom: 0;
-  left: 16px;
+
   min-width: 160px;
   transition: all 0.3s;
   display: flex;
@@ -26,4 +34,14 @@ $primary: #050505;
   &.show {
     height: 100vh;
   }
+}
+
+.bl {
+  left: 16px;
+  right: auto;
+}
+
+.br {
+  right: 16px;
+  left: auto;
 }

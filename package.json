@@ -1,7 +1,8 @@
 {
   "name": "envision",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "This package will help developers quickly and easily identify the environment in which the application is currently running.",
   "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
